@@ -9,7 +9,7 @@
         <a href="https://xbox.com">my favorite website</a>
         <?php
         $secret = "password123";
-        echo 10+13
+        echo 10+13;
         if (True) {
             echo "true";
         }
