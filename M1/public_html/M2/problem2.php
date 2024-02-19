@@ -8,8 +8,16 @@ function getTotal($arr) {
     $total = 0.00;
     //note: use the $arr variable, don't directly touch $a1-$a4
     //TODO do adding here
+    foreach ($arr as $x) {
+        $total += $x;
+    }
+   $rounded = round($total, 3);
+    $formatted = number_format($rounded, 2);
+    //UCID ddv4
+    //date 2/18/24
+    
     //TODO do rounding stuff here (round to two decimals i.e., 0.10, 0.01, 0.00)
-    echo "The total is " . var_export($total, true);
+    echo "The total is " . var_export($formatted, true);
 }
 echo "Problem 2: Adding Floats<br>";
 ?>
