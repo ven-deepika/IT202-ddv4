@@ -1,7 +1,9 @@
 <?php
 require(__DIR__ . "\\partials\\nav.php");
 require(__DIR__ . "\\partials\\flash.php");
+session_start();
 ?>
+
 <form onsubmit="return validate(this)" method="POST">
     <div>
         <label for="email">Email</label>
@@ -22,6 +24,7 @@ require(__DIR__ . "\\partials\\flash.php");
     }
 </script>
 <?php
+
 //TODO 2: add PHP Code
 if (isset($_POST["email"]) && isset($_POST["password"])) {
     $email = se($_POST, "email", "", false);
@@ -32,7 +35,9 @@ if (isset($_POST["email"]) && isset($_POST["password"])) {
     if (empty($email)) {
         flash("Email must not be empty");
         $hasError = true;
+
     }
+
     //sanitize
     $email = sanitize_email($email);
     //validate
@@ -51,7 +56,9 @@ if (isset($_POST["email"]) && isset($_POST["password"])) {
     if (!$hasError) {
         //TODO 4
         $db = getDB();
+
         $stmt = $db->prepare("SELECT id, email, username, password from Users where email = :email");
+
         try {
             $r = $stmt->execute([":email" => $email]);
             if ($r) {
@@ -59,13 +66,16 @@ if (isset($_POST["email"]) && isset($_POST["password"])) {
                 if ($user) {
                     $hash = $user["password"];
                     unset($user["password"]);
-                    if (password_verify($password, $hash)) {
-                        flash("Welcome $email");  
-            
-                        $_SESSION["user"] = $user;
-                        print_r($_SESSION['user']);
 
-                     die(header("Location: home.php"));
+                    if (password_verify($password, $hash)) {
+                        flash("Welcome $email"); 
+                        print_r($_SESSION);
+
+                        $_SESSION["user"] = $user;
+                       // http://127.0.0.1/IT202-ddv4/M1/login.php
+                       // http://127.0.0.1/IT202-ddv4/M1/home.php
+                     header("Location: home.php");
+                      exit;
                     } else {
                         flash("Invalid password");
                     }

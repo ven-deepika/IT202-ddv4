@@ -3,7 +3,7 @@
 //this will be active for any script that includes/requires this one
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
+error_reporting(E_ALL &~E_NOTICE);
 function getDB(){
     global $db;
     //this function returns an existing connection or creates a new one if needed

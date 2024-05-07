@@ -1,7 +1,7 @@
 <?php
 require(__DIR__ . "\\partials\\nav.php");
 require(__DIR__ . "\\partials\\flash.php");
-reset_session();
+
 $ini = @parse_ini_file(".env");
 
 if($ini && isset($ini["DB_URL"])){
