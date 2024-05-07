@@ -91,10 +91,24 @@ if (isset($_POST["email"]) && isset($_POST["password"]) && isset($_POST["confirm
         $stmt = $db->prepare("INSERT INTO Users (email, password, username) VALUES(:email, :password, :username)");
         try {
             $stmt->execute([":email" => $email, ":password" => $hash, ":username" => $username]);
-            flash("Successfully registered!", "success");
         } catch (Exception $e) {
   //          users_check_duplicate($e->errorInfo());
         }
+        $stmt2 = $db->prepare("INSERT INTO User_Roles (`user_id`,`role_id`, `is_active`, `created`, `modified`) VALUES(:new_user_id, :default_role_id, 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)");
+        $stmt3 = $db->prepare("SELECT id FROM Users WHERE username = :username");
+        $stmt4 =  $db->prepare("SELECT id FROM Roles WHERE `name` ='Shopper'");
+        $stmt3->execute([":username" => $username]);
+        $stmt4->execute();
+
+        $result1 = $stmt3->fetch(PDO::FETCH_ASSOC);
+        $result2 = $stmt4->fetch(PDO::FETCH_ASSOC);
+        $new_user_id = $result1['id'];
+        $default_role_id = $result2['id'];
+        try {
+            $stmt2->execute([":new_user_id" => $new_user_id, ":default_role_id" => $default_role_id]);
+            flash("Successfully registered!", "success");
+        } catch (Exception $e) {}
+
     }
 }
 ?>

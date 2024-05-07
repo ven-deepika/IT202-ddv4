@@ -1,9 +1,16 @@
 <?php
-require_once(__DIR__ . "\\..\\..\\partials\\nav.php");
+require_once(__DIR__ . "\\partials\\nav.php");
+
 if (!is_logged_in()) {
     die(header("Location: login.php"));
 }
 ?>
+<style>
+<?php require_once( __DIR__ . "\\lib\\style.css"); ?>
+</style>
+
+
+
 <?php
 if (isset($_POST["save"])) {
     $email = se($_POST, "email", null, false);
@@ -88,7 +95,8 @@ if (isset($_POST["save"])) {
 $email = get_user_email();
 $username = get_username();
 ?>
-<form method="POST" onsubmit="return validate(this);">
+<body id="custom-style">
+<form  method="POST" onsubmit="return validate(this);">
     <div class="mb-3">
         <label for="email">Email</label>
         <input type="email" name="email" id="email" value="<?php se($email); ?>" />
@@ -113,7 +121,7 @@ $username = get_username();
     </div>
     <input type="submit" value="Update Profile" name="save" />
 </form>
-
+</body>
 <script>
     function validate(form) {
         let pw = form.newPassword.value;
@@ -145,5 +153,5 @@ $username = get_username();
     }
 </script>
 <?php
-require_once(__DIR__ . "/../../partials/flash.php");
+require_once(__DIR__ . "\\partials\\flash.php");
 ?>

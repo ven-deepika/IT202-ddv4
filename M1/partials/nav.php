@@ -1,4 +1,7 @@
 <script src="helpers.js"></script>
+<style>
+<?php include '\\lib\\style.css'; ?>
+</style>
 <?php
 
 
@@ -29,20 +32,43 @@ if (($localWorks && $domain == "localhost") || $domain != "localhost") {
 
 session_start();
 ?>
-<nav>
-    <div class="container fluid">
-        
-            <ul class="navbar all">
-                <?php if (is_logged_in()) : ?>
-                    <li><a href="home.php">Home</a></li>
-                <?php endif; ?>
-                <?php if (!is_logged_in()) : ?>
-                    <li><a href="login.php">Login</a></li>
-                    <li><a href="register.php">Register</a></li>
-                <?php endif; ?>
-                <?php if (is_logged_in()) : ?>
-                    <li><a href="logout.php">Logout</a></li>
-                <?php endif; ?>
-            </ul>
+<head>
+<meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+
+<body id="custom-style">
+<nav class="navbar navbar-inverse"> 
+  <div class="container-fluid custom-style">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="home.php">happy capy</a>
+    </div>
+    <ul class="nav navbar-nav">
+    <?php if (is_logged_in()) : ?>
+      <li class="active"><a href="home.php">Home</a></li>
+    <?php endif; ?>
+      <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Page 1 <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li><a href="#">Page 1-1</a></li>
+          <li><a href="#">Page 1-2</a></li>
+          <li><a href="#">Page 1-3</a></li>
+        </ul>
+      </li>
+      <li><a href="profile.php"><span class="glyphicon glyphicon-user"></span> Profile</a></li>    </ul>
+    <ul class="nav navbar-nav navbar-right">
+    <?php if (!is_logged_in()) : ?>
+      <li><a href="register.php"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+      <li><a href="login.php"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+      <?php endif; ?>
+    <?php if (is_logged_in()) : ?>
+        <li><a href="cart.php"><span class="glyphicon glyphicon-user"></span> Cart </a></li>
+        <li><a href="logout.php"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+
+      <?php endif; ?>
+    </ul>      
     </div>
 </nav>
+</body>
