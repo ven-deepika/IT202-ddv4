@@ -2,6 +2,13 @@
 require(__DIR__ . "\\partials\\nav.php");
 require(__DIR__ . "\\partials\\flash.php");
 reset_session();
+$ini = @parse_ini_file(".env");
+
+if($ini && isset($ini["DB_URL"])){
+    //load local .env file
+    $url = $ini["DB_URL"];
+    $db_url = parse_url($url);
+}
 ?>
 <form onsubmit="return validate(this)" method="POST">
     <div>

@@ -1,6 +1,6 @@
 <?php
 require(__DIR__ . "\\partials\\nav.php");
-require(__DIR__ . "\\..\\..\\partials\\flash.php");
+require(__DIR__ . "\\partials\\flash.php");
 ?>
 <form onsubmit="return validate(this)" method="POST">
     <div>
@@ -60,9 +60,12 @@ if (isset($_POST["email"]) && isset($_POST["password"])) {
                     $hash = $user["password"];
                     unset($user["password"]);
                     if (password_verify($password, $hash)) {
-                        flash("Weclome $email");
+                        flash("Welcome $email");  
+            
                         $_SESSION["user"] = $user;
-                        die(header("Location: home.php"));
+                        print_r($_SESSION['user']);
+
+                     die(header("Location: home.php"));
                     } else {
                         flash("Invalid password");
                     }

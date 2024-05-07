@@ -1,6 +1,9 @@
 <script src="helpers.js"></script>
 <?php
 //Note: this is to resolve cookie issues with port numbers
+
+require_once(__DIR__ . "\\..\\lib\\functions.php");
+
 $domain = $_SERVER["HTTP_HOST"];
 if (strpos($domain, ":")) {
     $domain = explode(":", $domain)[0];
@@ -13,14 +16,13 @@ if (($localWorks && $domain == "localhost") || $domain != "localhost") {
     session_set_cookie_params([
         "lifetime" => 60 * 60,
         "path" => "/Project",
-        //"domain" => $_SERVER["HTTP_HOST"] || "localhost",
+       // "domain" => $_SERVER["HTTP_HOST"] || "localhost",
         "domain" => $domain,
         "secure" => true,
         "httponly" => true,
         "samesite" => "lax"
     ]);
 }
-require_once(__DIR__ . "\\..\\lib\\functions.php");
 
 ?>
 <nav>
