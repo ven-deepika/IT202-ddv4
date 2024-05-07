@@ -107,6 +107,14 @@ try {
     } else {
         echo "<p>Didn't find any files, please check the directory/directory contents/permissions (note files must end in .sql)</p>";
     }
+
+    //admin setup
+    $hash = password_hash('happyhappy', PASSWORD_BCRYPT);
+    $stmt = $db->prepare("INSERT INTO `Users` (`email`, `password`, `username`) VALUES('happy@happy.com', :pass, 'happycapy')");
+    $stmt->execute([":pass" => $hash]);
+    
+    $stmt = $db->prepare("INSERT INTO `User_Roles` (`user_id`, `role_id`, `is_active`, `created`, `modified`) VALUES (1, 1, 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)");
+    $stmt->execute();
     $db = null;
 } catch (Exception $e) {
     echo $e->getMessage();

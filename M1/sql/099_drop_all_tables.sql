@@ -1,4 +1,6 @@
+/*
 
-DROP TABLE IF EXISTS `Roles`;
 DROP TABLE IF EXISTS `User_Roles`;
+DROP TABLE IF EXISTS `Roles`;
 DROP TABLE IF EXISTS `Users`;
+*/
