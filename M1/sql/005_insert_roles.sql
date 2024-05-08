@@ -1,0 +1,2 @@
+INSERT INTO `Roles` (`name`, `description`, `is_active`, `created`, `modified`) VALUES ('Admin', 'Shop Owner', 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP );
+INSERT INTO `Roles` (`name`, `description`, `is_active`, `created`, `modified`) VALUES ('Shopper', 'Basic User', 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP );
