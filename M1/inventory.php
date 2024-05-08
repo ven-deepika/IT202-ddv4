@@ -27,7 +27,7 @@ if (isset($_POST["save"])) {
 
 
 
-
+/*
     var_dump($itemName);
     var_dump($itemDescription);
     var_dump($itemCategory);
@@ -35,14 +35,13 @@ if (isset($_POST["save"])) {
     var_dump($itemPrice);
     var_dump($itemVisible);
 
+*/
 
-
-    $params = [":itemName" => $itemName, ":itemDescription" => $itemDescription, ":itemCategory" => $itemCategory, ":itemStock" => $itemStock, ":itemPrice" => $itemPrice, ":itemVisible" => $itemVisible ];
     $db = getDB();
-    $stmt = $db->prepare("INSERT INTO `Products` (`id`, `name`, `description`, `category`, `stock`, `created`, `modified`, `unit_price`, `visibility`) VALUES (:itemName, :itemDescription, :itemCategory, :itemStock, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, :itemPrice, :itemVisibile)");
+    $stmt = $db->prepare("INSERT INTO `Products` (`name`, `description`, `category`, `stock`, `created`, `modified`, `unit_price`, `visibility`) VALUES (:itemName, :itemDescription, :itemCategory, :itemStock, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, :itemPrice, :itemVisible)");
     try {
       //  print_r($stmt);
-        $stmt->execute($params);
+        $stmt->execute([":itemName" => $itemName, ":itemDescription" => $itemDescription, ":itemCategory" => $itemCategory, ":itemStock" => $itemStock, ":itemPrice" => $itemPrice, ":itemVisible" => $itemVisible ]);
       //  print_r($stmt);
         flash("Inventory updated", "success");
     } catch (Exception $e) {flash("failed to update", "danger");}
