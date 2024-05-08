@@ -13,3 +13,4 @@ INSERT INTO `Products` (`name`, `description`, `category`, `stock`, `created`, `
 INSERT INTO `Products` (`name`, `description`, `category`, `stock`, `created`, `modified`, `unit_price`, `visibility`) VALUES ('test6', 'May or may not be on a diet', 'Sticker', 10, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 2.75, 1);
 
 INSERT INTO `Products` (`name`, `description`, `category`, `stock`, `created`, `modified`, `unit_price`, `visibility`) VALUES ('test7', 'May or may not be on a diet', 'Sticker', 10, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 2.75, 1);
+INSERT INTO `Products` (`name`, `description`, `category`, `stock`, `created`, `modified`, `unit_price`, `visibility`) VALUES ('test8', 'May or may not be on a diet', 'Sticker', 10, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 2.75, 1);
