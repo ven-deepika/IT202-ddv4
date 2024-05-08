@@ -44,8 +44,10 @@ if (isset($_POST["save"])) {
         $stmt->execute([":itemName" => $itemName, ":itemDescription" => $itemDescription, ":itemCategory" => $itemCategory, ":itemStock" => $itemStock, ":itemPrice" => $itemPrice, ":itemVisible" => $itemVisible ]);
       //  print_r($stmt);
         flash("Inventory updated", "success");
-    } catch (Exception $e) {flash("failed to update", "danger");}
+    } catch (Exception $e) {flash("failed to add", "danger");}
     
+
+
     $db = NULL;
 }
 
@@ -113,7 +115,10 @@ if (isset($_POST["save"])) {
                 </div>
                 <input type="submit" value="Update Profile" name="save" />
             </form>
-        </div>  
+        </div> 
+        
+            
+
     </div>
 <!-------------- INVENTORY LISTING------------------>
 
@@ -144,6 +149,7 @@ if (isset($_POST["save"])) {
 
                             while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
                                 echo "<tr>";
+                                $rowid = (int)$row["id"];
                                 echo "<td>" . $row["name"] . "</td>";
                                 echo "<td>" . $row["description"] . "</td>";
                                 echo "<td>" . $row["category"] . "</td>";
@@ -152,12 +158,17 @@ if (isset($_POST["save"])) {
                                 echo "<td>" . $row["modified"] . "</td>";
                                 echo "<td>" . $row["unit_price"] . "</td>";
                                 echo "<td>" . $row["visibility"] . "</td>";
+                                echo"<td><form action='editproduct.php' method='post'>
+                                <button type='submit' name='addedItem' value='" . $rowid . "'>Edit</button></form></td>";
                                 echo "</tr>";
                             }
                             
                             $db = NULL;
 
                      } catch (Exception $e) {}
+
+                     
+
 
 
                      ?>
