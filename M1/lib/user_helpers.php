@@ -47,4 +47,36 @@ function get_user_id()
     }
     return false;
 }
+function get_user_role()
+{
+    if(is_logged_in()) {
+        return $_SESSION["role"];
+
+    }
+    return false;
+}
+
+function is_admin() 
+{
+    if(is_logged_in()) {
+
+        $db = getDB();
+
+        $stmt = $db->prepare("SELECT `name` FROM Roles WHERE `id`= :id");
+        $roleid = get_user_role();
+      
+
+        $stmt->execute([":id" => $roleid]);
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        
+        if($result && $result['name'] === "Admin" ){
+            return true;
+        }
+
+        $db = NULL;
+        return false;
+    }
+    return false;
+}
+
 ?>

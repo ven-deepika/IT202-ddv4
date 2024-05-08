@@ -2,6 +2,7 @@
 //session_start();
 require(__DIR__ . "\\lib\\functions.php");
 echo $BASE_PATH;
-header("Location: $BASE_PATH\\login.php");
+reset_session();
+header("Location: $BASE_PATH\\listing.php");
 exit;
 ?>

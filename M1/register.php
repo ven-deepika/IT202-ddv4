@@ -10,6 +10,35 @@ if($ini && isset($ini["DB_URL"])){
     $db_url = parse_url($url);
 }
 ?>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <title>happy shop</title>
+    <style>
+                    .background-container {
+                        position: fixed;
+                        top: 0;
+                        left: 0;
+                        width: 100%;
+                        height: 100%;
+                        background-image: url('dark-background.jpg'); /* Set the background image */
+                        background-size: cover;
+                        background-repeat: repeat;
+                        opacity: 0.5; /* Adjust the opacity value (0.0 to 1.0) */
+                        z-index: -1; /* Move the background container behind other content */
+                    }
+                    .container {
+                        padding-top: 50px; /* Add padding to prevent content from overlapping with the background */
+                        z-index: 1; /* Ensure the content appears above the background */
+                    }
+    </style>
+</head>
+<body>
+<div class="background-container"></div> <!-- Container for the background image -->
+<div class="container">
+
 <form onsubmit="return validate(this)" method="POST">
     <div>
         <label for="email">Email</label>
@@ -29,6 +58,9 @@ if($ini && isset($ini["DB_URL"])){
     </div>
     <input type="submit" value="Register" />
 </form>
+</div>
+</div>
+</body>
 <script>
     function validate(form) {
         //TODO 1: implement JavaScript validation

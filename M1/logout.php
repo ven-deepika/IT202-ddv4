@@ -5,5 +5,5 @@ require(__DIR__ . "\\lib\\functions.php");
 reset_session();
 
 flash("You have been logged out", "success");
- die(header("Location: login.php"));
+ die(header("Location: listing.php"));
 ?>

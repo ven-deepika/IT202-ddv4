@@ -1,0 +1,13 @@
+CREATE TABLE IF NOT EXISTS `Products` (
+    `id` INT NOT NULL AUTO_INCREMENT,
+    `name` VARCHAR(60) NOT NULL,
+    `description` VARCHAR(100) NOT NULL,
+    `category` VARCHAR(60),
+    `stock` INT NOT NULL,
+    `created` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    `modified` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    `unit_price` DECIMAL(10,2),
+    `visibility` BOOLEAN,
+    PRIMARY KEY (`id`),
+    UNIQUE (`name`)
+)

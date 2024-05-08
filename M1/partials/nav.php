@@ -43,32 +43,67 @@ session_start();
 <body id="custom-style">
 <nav class="navbar navbar-inverse"> 
   <div class="container-fluid custom-style">
+
+  <!------------  SHOP NAME / LOGO ------------>
     <div class="navbar-header">
       <a class="navbar-brand" href="home.php">happy capy</a>
     </div>
-    <ul class="nav navbar-nav">
-    <?php if (is_logged_in()) : ?>
-      <li class="active"><a href="home.php">Home</a></li>
-    <?php endif; ?>
-      <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Page 1 <span class="caret"></span></a>
-        <ul class="dropdown-menu">
-          <li><a href="#">Page 1-1</a></li>
-          <li><a href="#">Page 1-2</a></li>
-          <li><a href="#">Page 1-3</a></li>
-        </ul>
-      </li>
-      <li><a href="profile.php"><span class="glyphicon glyphicon-user"></span> Profile</a></li>    </ul>
-    <ul class="nav navbar-nav navbar-right">
-    <?php if (!is_logged_in()) : ?>
-      <li><a href="register.php"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-      <li><a href="login.php"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-      <?php endif; ?>
-    <?php if (is_logged_in()) : ?>
-        <li><a href="cart.php"><span class="glyphicon glyphicon-user"></span> Cart </a></li>
-        <li><a href="logout.php"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
 
-      <?php endif; ?>
-    </ul>      
+ <!------------  HOME BUTTON ------------>
+    <ul class="nav navbar-nav">
+        <?php if (is_logged_in()) : ?>
+            <li class="active"><a href="home.php">Home</a></li>
+        <?php endif; ?>
+
+ <!------------  SHOP FOR ADMIN ------------>
+
+        <?php if (is_logged_in() && is_admin()) : ?>
+            <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#"> Shop <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                <li><a href="listing.php"> Public Listing </a></li>
+                <li><a href="inventory.php"> Inventory </a></li>
+                <li><a href="#"> Purchase Log </a></li>
+                </ul>
+            </li>
+        <?php endif; ?>
+
+ <!------------  SHOP PUBLIC LISTING  ------------>
+
+        <?php if (!is_admin()) : ?>
+            <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#"> Shop <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                    <li><a href="listing.php"> All </a></li>
+                    <li><a href="#"> Stickers </a></li>
+                    <li><a href="#"> Comic Books </a></li>
+                </ul>
+            </li>
+        <?php endif; ?>
+
+     <!------------  PROFILE FOR ALL USERS  ------------>
+        <?php if (is_logged_in()) : ?>
+            <li><a href="profile.php"><span class="glyphicon glyphicon-user"></span> Profile</a></li>    </ul>
+        <?php endif; ?>
+
+        </ul>
+
+        <ul class="nav navbar-nav navbar-right">
+
+             <!------------  LOGGED OUT  ------------>
+
+            <?php if (!is_logged_in()) : ?>
+                <li><a href="register.php"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+                <li><a href="login.php"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+            <?php endif; ?>
+
+            <!------------  LOGGED IN  ------------>
+
+            <?php if (is_logged_in()) : ?>
+                <li><a href="cart.php"><span class="glyphicon glyphicon-user"></span> Cart </a></li>
+                <li><a href="logout.php"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+            <?php endif; ?>
+            
+        
+        </ul>
     </div>
 </nav>
 </body>

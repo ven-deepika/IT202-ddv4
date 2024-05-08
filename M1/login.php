@@ -3,12 +3,8 @@ require(__DIR__ . "\\partials\\nav.php");
 require(__DIR__ . "\\partials\\flash.php");
 session_start();
 ?>
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>happy shop</title>
-</head>
+
+
 <form onsubmit="return validate(this)" method="POST">
     <div>
         <label for="email">Email</label>
@@ -20,6 +16,7 @@ session_start();
     </div>
     <input type="submit" value="Login" />
 </form>
+
 <script>
     function validate(form) {
         //TODO 1: implement JavaScript validation
@@ -74,13 +71,16 @@ if (isset($_POST["email"]) && isset($_POST["password"])) {
 
                     if (password_verify($password, $hash)) {
                         flash("Welcome $email"); 
-                        print_r($_SESSION);
-
                         $_SESSION["user"] = $user;
-                       // http://127.0.0.1/IT202-ddv4/M1/login.php
-                       // http://127.0.0.1/IT202-ddv4/M1/home.php
-                     header("Location: home.php");
-                      exit;
+
+                        $stmt = $db->prepare("SELECT `role_id` from User_Roles where `user_id`=:userid");
+                        $userid = $user['id'];
+                        $stmt->execute([":userid" => $userid]);
+                        $result1 = $stmt->fetch(PDO::FETCH_ASSOC);
+                        $_SESSION["role"] = $result1['role_id'];
+                    
+                        
+                     die(header("Location: home.php"));
                     } else {
                         flash("Invalid password");
                     }
