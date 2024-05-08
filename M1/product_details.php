@@ -42,9 +42,11 @@ session_start();
 <script>
         function redirectToPage() {
             // Redirect to the desired URL
-            window.location.href = "product_details.php"; 
+            window.location.href = "cart.php"; 
         }
 </script>
+
+
 <body>
     <div class="background-container"></div> <!-- Container for the background image -->
     <div class="container">
@@ -52,34 +54,49 @@ session_start();
 
     <div class="row justify-content-center">
             <div id="shopliststyle" class="col-md-12 text-center">
-            
-                <h1>In Stock</h1>
-                    <table>
-                        <tr>
-                           
-                            <!-- Add more headers if needed -->
-                        </tr>
+        
 
-                        <?php
-                        try {
-                                $db = getDB();
-                                $stmt=$db->prepare("SELECT * FROM `Products` WHERE `visibility`=1");
-                                $stmt->execute();
+            <h1>Product Details (ALL)</h1>
+                <table>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Description</th>
+                        <th>Category</th>
+                        <th>Price</th>
+                        <th>Options</th>
+                        <!-- Add more headers if needed -->
+                     </tr>
 
-                                while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                                    echo "<tr>";
-                                    echo "<td><img src='sticker-1.jpg' class='img-fluid small-image' alt='Responsive image'></td>";    
-                                    echo "<td> - " . $row["name"] . "</td>";
-                                    echo " <td><button type='button' class='btn btn-primary' onclick='redirectToPage()'>Details</button></td>";
-                                    echo "</tr>";
-                                }
-                                
-                                $db = NULL;
+                     <?php
+                     try {
+                            $db = getDB();
+                            $stmt=$db->prepare("SELECT * FROM `Products` WHERE `visibility`=1");
+                            $stmt->execute();
 
-                        } catch (Exception $e) {}
+                            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                                echo "<tr>";
+                                echo "<td>" . $row["name"] . "</td>";
+                                echo "<td>" . $row["description"] . "</td>";
+                                echo "<td>" . $row["category"] . "</td>";
+                                echo "<td>" . $row["stock"] . "</td>";
+                                echo "<td>$" . $row["unit_price"] . "</td>";
+                                echo " <td><form action='addtocart.php' method='post'>
+                                <button type='submit' name='addedItem' value='" . $row["id"] . "'>Add to Cart</button></form></td>";
+                                echo "</tr>";
+                            }
+                            
+                            $db = NULL;
+
+                     } catch (Exception $e) {}
 
 
-                        ?>
+                     ?>
+
+
+        
     </div>
     </div>
+    </div>
+                    </div>
 </body>

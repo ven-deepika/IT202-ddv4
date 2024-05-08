@@ -133,9 +133,17 @@ if (isset($_POST["email"]) && isset($_POST["password"]) && isset($_POST["confirm
         $stmt4->execute();
 
         $result1 = $stmt3->fetch(PDO::FETCH_ASSOC);
+        while ($result1 != false) {
+            
+            if (isset($result1['id'])) {$new_user_id= $result1['id'];}
+            $result1 = $stmt->fetch(PDO::FETCH_ASSOC);
+        }
         $result2 = $stmt4->fetch(PDO::FETCH_ASSOC);
-        $new_user_id = $result1['id'];
-        $default_role_id = $result2['id'];
+        while ($result2 != false) {
+            if (isset($result2['id'])) {$default_role_id= $result2['id'];}
+            $result2 = $stmt->fetch(PDO::FETCH_ASSOC);
+        }
+        
         try {
             $stmt2->execute([":new_user_id" => $new_user_id, ":default_role_id" => $default_role_id]);
             flash("Successfully registered!", "success");

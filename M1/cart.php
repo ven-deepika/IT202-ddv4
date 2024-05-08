@@ -26,11 +26,72 @@ session_start();
     </style>
 
 </head>
-
+<script>
+        function redirectToPage() {
+            // Redirect to the desired URL
+            window.location.href = "checkout.php"; 
+        }
+</script>
+<script>
+        function redirectToPage2() {
+            // Redirect to the desired URL
+            window.location.href = "clearcart.php"; 
+        }
+</script>
 <body>
 <div class="background-container"></div> <!-- Container for the background image -->
 <div class="container">
+                <h1>Cart</h1>
 
+
+
+<?php
+
+if (!is_logged_in()){
+    echo "<h2>Please log in to shop</h2>";
+
+}
+else {
+echo "<table>";
+    $db = getDB();
+    
+        $total=0;
+            $stmt = $db->prepare("SELECT `product_name`, `unit_price` FROM `Cart` WHERE `user_id` = :userid");
+            $userid = $_SESSION['user']['id'];
+            $stmt->execute([":userid" => $userid]);
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+            $itemname = NULL;
+            $itemprice=NULL;
+          //  print_r($result);
+            while ($result != false) {
+            
+            if (isset($result['product_name'])) {$itemname= $result['product_name'];}
+            if (isset($result['unit_price'])) {$itemprice = $result['unit_price'];$total = $total + (float)$result["unit_price"];}
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        
+            echo "<tr>";
+            echo "<td>" . $itemname . "</td>";
+            echo "<td> .............. </td>";
+            echo "<td> .............. </td>";
+            echo "<td> .............. </td>";
+            echo "<td>" . $itemprice . "</td>";
+            echo "</tr>";
+            }
+    }
+    
+ 
+echo "</table>";
+
+   if(is_logged_in()){$_SESSION['cart']['total'] = $total;}
+
+echo "<button type='button' class='btn btn-primary' onclick='redirectToPage()'>Checkout</button>";
+
+echo "<button type='button' class='btn btn-primary' onclick='redirectToPage2()'>Clear Cart</button>";
+
+
+
+
+?>
 </div>
 </div>
 </body>
