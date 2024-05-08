@@ -19,9 +19,23 @@ session_start();
 
 <script>
     function validate(form) {
-        //TODO 1: implement JavaScript validation
-        //ensure it returns false for an error and true for success
+        var email = form.email.value;
+        var password = form.password.value;
 
+        // Validate email format
+        var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) {
+            alert("Please enter a valid email address.");
+            return false;
+        }
+
+        // Validate password length
+        if (password.length < 8) {
+            alert("Password must be at least 8 characters long.");
+            return false;
+        }
+
+        // Validation successful
         return true;
     }
 </script>
@@ -35,7 +49,7 @@ if (isset($_POST["email"]) && isset($_POST["password"])) {
     //TODO 3
     $hasError = false;
     if (empty($email)) {
-        flash("Email must not be empty");
+        flash("Email must not be empty", 'danger');
         $hasError = true;
 
     }
@@ -82,7 +96,7 @@ if (isset($_POST["email"]) && isset($_POST["password"])) {
                         
                      die(header("Location: home.php"));
                     } else {
-                        flash("Invalid password");
+                        flash("Incorrect Password", "danger");
                     }
                 } else {
                     flash("Email not found");

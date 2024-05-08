@@ -63,10 +63,40 @@ if($ini && isset($ini["DB_URL"])){
 </body>
 <script>
     function validate(form) {
-        //TODO 1: implement JavaScript validation
-        //ensure it returns false for an error and true for success
+        function validate(form) {
+        var email = form.email.value;
+        var username = form.username.value;
+        var password = form.password.value;
+        var confirm = form.confirm.value;
 
+        // Validate email format
+        var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) {
+            alert("Please enter a valid email address.");
+            return false;
+        }
+
+        // Validate username length
+        if (username.length > 30) {
+            alert("Username must be at most 30 characters long.");
+            return false;
+        }
+
+        // Validate password length
+        if (password.length < 8) {
+            alert("Password must be at least 8 characters long.");
+            return false;
+        }
+
+        // Validate password confirmation
+        if (password !== confirm) {
+            alert("Password and confirm password must match.");
+            return false;
+        }
+
+        // Validation successful
         return true;
+    }
     }
 </script>
 <?php
